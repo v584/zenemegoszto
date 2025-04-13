@@ -1,0 +1,30 @@
+<div
+  class="flex justify-between items-center hover:bg-zinc-800 p-2 rounded-md transition-colors duration-150"
+>
+  <div class="flex items-center">
+    @if (track.coverUrl) {
+      <img
+        [src]="track.coverUrl"
+        (click)="clicked.emit()"
+        alt="Track cover"
+        class="h-10 w-10 rounded mr-2 cursor-pointer"
+      />
+    }
+    <div>
+      <h3 class="text-md font-medium my-0">
+        {{ track.title }}
+      </h3>
+      <p class="text-sm text-zinc-500 my-0">
+        {{ track.artists | artistsList }}
+      </p>
+    </div>
+  </div>
+  <div class="flex items-center">
+    @if (track.album !== undefined) {
+      <a routerLink="/album" class="block text-zinc-500">{{ track.album }}</a>
+    }
+    <p class="text-sm text-zinc-600 ml-2">
+      {{ track.durationSeconds | formatDuration }}
+    </p>
+  </div>
+</div>

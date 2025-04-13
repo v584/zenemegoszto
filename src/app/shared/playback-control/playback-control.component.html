@@ -1,0 +1,21 @@
+@if (currentTrack) {
+  <div
+    class="fixed bottom-0 left-0 right-0 bg-zinc-900 flex items-center justify-between p-2 z-50"
+  >
+    <div class="flex">
+      <img
+        src="/placeholder.png"
+        class="h-10 w-10 mr-2 rounded object-cover"
+        alt=""
+      />
+      <div>
+        <h3 class="text-md font-medium my-0">
+          {{ currentTrack.title }}
+        </h3>
+        <p class="text-sm text-zinc-500 my-0">
+          {{ currentTrack.artists | artistsList }}
+        </p>
+      </div>
+    </div>
+  </div>
+}

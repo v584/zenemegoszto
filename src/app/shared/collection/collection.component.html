@@ -1,0 +1,43 @@
+<mat-card class="max-w-6xl mx-auto overflow-hidden">
+  <mat-card-header>
+    <div class="flex items-center gap-4">
+      <img
+        [src]="collection.imageUrl"
+        alt="Cover image"
+        class="object-cover h-48 w-48 rounded-md"
+      />
+      <div>
+        <mat-card-title>
+          <h2 class="my-0 text-6xl">
+            {{ collection.title }}
+          </h2>
+        </mat-card-title>
+        @if (collection.kind == "playlist") {
+          <mat-card-subtitle>{{ collection.creator }}</mat-card-subtitle>
+        }
+        @if (collection.kind == "album") {
+          <mat-card-subtitle>
+            <p>
+              {{ collection.artist }}
+              <span class="text-zinc-500">{{
+                collection.releaseDate | date: "yyyy"
+              }}</span>
+            </p>
+          </mat-card-subtitle>
+        }
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      @for (track of collection.tracks; track track.id) {
+        <mat-list-item>
+          <app-track-list-item
+            [track]="track"
+            (clicked)="play(track)"
+          ></app-track-list-item>
+        </mat-list-item>
+      }
+    </mat-list>
+  </mat-card-content>
+</mat-card>

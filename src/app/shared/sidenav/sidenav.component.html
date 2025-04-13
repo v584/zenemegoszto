@@ -1,0 +1,28 @@
+<mat-sidenav-container class="min-h-screen">
+  <mat-sidenav mode="side" opened>
+    <mat-toolbar>Music App</mat-toolbar>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <mat-list-item routerLink="/feed" routerLinkActive="!bg-zinc-700">
+        <mat-icon matListItemIcon>rss_feed</mat-icon>
+        <span matListItemTitle>Feed</span>
+      </mat-list-item>
+      <mat-list-item routerLink="/profile" routerLinkActive="!bg-zinc-700">
+        <mat-icon matListItemIcon>account_circle</mat-icon>
+        <span matListItemTitle>Profile Settings</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+
+      @for (playlist of playlists; track playlist.id) {
+        <mat-list-item routerLink="/playlist">
+          <img matListItemIcon src="/placeholder.png" alt="" />
+          <p matListItemTitle>{{ playlist.title }}</p>
+        </mat-list-item>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="p-2">
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

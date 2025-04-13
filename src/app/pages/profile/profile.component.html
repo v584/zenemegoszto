@@ -1,0 +1,58 @@
+<div class="max-w-3xl mx-auto bg-zinc-900 shadow-lg rounded-lg overflow-hidden">
+  <div class="bg-zinc-800 px-6 py-4 border-b border-zinc-700">
+    <h2 class="text-xl">Profile Settings</h2>
+  </div>
+  <div class="p-6">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div class="flex justify-center mb-4">
+        <img
+          [src]="profileForm.get('profilePicture')?.value"
+          alt="Profile Picture"
+          class="rounded-full h-24 w-24 object-cover border-2 border-zinc-300"
+        />
+      </div>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-icon matSuffix>person</mat-icon>
+        @if (profileForm.get("username")?.hasError("required")) {
+          <mat-error>Username is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-icon matSuffix>email</mat-icon>
+        @if (profileForm.get("email")?.hasError("required")) {
+          <mat-error>Email is required.</mat-error>
+        }
+        @if (
+          profileForm.get("email")?.hasError("email") &&
+          !profileForm.get("email")?.hasError("required")
+        ) {
+          <mat-error>Invalid email format.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Bio</mat-label>
+        <textarea matInput formControlName="bio" rows="4"></textarea>
+        <mat-icon matSuffix>description</mat-icon>
+      </mat-form-field>
+
+      <div class="flex justify-end">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          class="ml-2"
+          [disabled]="profileForm.invalid"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
