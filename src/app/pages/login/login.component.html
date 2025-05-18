@@ -40,10 +40,9 @@
             }
           </mat-form-field>
         </div>
-
-        <mat-checkbox class="mb-4" formControlName="rememberMe"
-          >Remember me</mat-checkbox
-        >
+        @if (errorMessage) {
+          <mat-error>{{ errorMessage }}</mat-error>
+        }
       </mat-card-content>
 
       <mat-card-actions class="flex justify-center items-center">
