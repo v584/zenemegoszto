@@ -5,6 +5,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Playlist } from '../../playlist';
+import { MatButtonModule } from '@angular/material/button';
+
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-sidenav',
@@ -15,15 +18,31 @@ import { Playlist } from '../../playlist';
     MatToolbarModule,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css',
 })
 export class SidenavComponent implements OnInit {
+  constructor(private breakpointObserver: BreakpointObserver) {}
   playlists: Playlist[] = [];
+  isSidenavOpened = false;
+  sidenavMode: 'over' | 'side' = 'over';
 
   ngOnInit(): void {
     this.playlists = this.getMockPlaylists();
+
+    this.breakpointObserver
+      .observe([Breakpoints.Small])
+      .subscribe((result: any) => {
+        if (result.matches) {
+          this.sidenavMode = 'over';
+          this.isSidenavOpened = false;
+        } else {
+          this.sidenavMode = 'side';
+          this.isSidenavOpened = true;
+        }
+      });
   }
 
   getMockPlaylists(): Playlist[] {

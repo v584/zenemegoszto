@@ -1,6 +1,11 @@
 <mat-sidenav-container class="min-h-screen">
-  <mat-sidenav mode="side" opened>
-    <mat-toolbar>Music App</mat-toolbar>
+  <mat-sidenav
+    #sidenav
+    [mode]="sidenavMode"
+    [opened]="isSidenavOpened"
+    (closedStart)="isSidenavOpened = false"
+  >
+    <mat-toolbar> Music App </mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list>
       <mat-list-item routerLink="/feed" routerLinkActive="!bg-zinc-700">
@@ -23,6 +28,13 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="p-2">
+    <mat-toolbar>
+      @if (sidenavMode === "over") {
+        <button mat-mini-fab (click)="isSidenavOpened = !isSidenavOpened">
+          <mat-icon>menu</mat-icon>
+        </button>
+      }
+    </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
